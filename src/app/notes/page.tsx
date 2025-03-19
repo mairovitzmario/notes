@@ -5,6 +5,9 @@ import { FeatureItem } from "@/app/notes/components/FeatureItem";
 import NoteIcon from "./components/NoteIcon";
 
 export default function Home() {
+
+
+
   return (
     <main >
       <div className="bg-gradient-to-b from-background to-muted/30 flex flex-col items-center justify-center p-4 md:p-8">

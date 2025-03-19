@@ -6,17 +6,26 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { redirect } from 'next/navigation'
 
+import { createClient } from '@/utils/supabase/server'
 
 
 import Title from "@/components/title";
 
 
-export default function NotesLayout({
+export default async function NotesLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/login')
+  }
   return (
 
     <SidebarProvider>
