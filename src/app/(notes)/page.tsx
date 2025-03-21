@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, Pencil, Trash2, FolderOpen, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FeatureItem } from "@/app/notes/components/FeatureItem";
+import { FeatureItem } from "@/app/(notes)/components/FeatureItem";
 import NoteIcon from "./components/NoteIcon";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <main >
-      <div className="bg-gradient-to-b from-background to-muted/30 flex flex-col items-center justify-center p-4 md:p-8">
+      <div className="flex flex-col items-center justify-center p-4 md:p-8">
         <div className="max-w-3xl w-full space-y-8">
           <div className="text-center space-y-3">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Welcome to Notes</h1>

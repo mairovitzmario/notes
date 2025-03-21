@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 import './globals.css'
 
@@ -17,8 +18,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-
-                {children}
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     )

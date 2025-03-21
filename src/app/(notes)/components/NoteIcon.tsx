@@ -20,8 +20,8 @@ export default function NoteIcon() {
                         <div className="w-5/6 h-3 bg-muted/70 rounded"></div>
                         <div className="w-full h-3 bg-muted/70 rounded"></div>
                         <div className="w-4/5 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded"></div>
-                        <div className="w-5/6 h-3 bg-muted/70 rounded"></div>
+                        <div className="w-full h-3 bg-muted/70 rounded hidden md:block"></div>
+                        <div className="w-5/6 h-3 bg-muted/70 rounded hidden md:block"></div>
                     </div>
                 </div>
             </div>
