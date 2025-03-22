@@ -11,6 +11,7 @@ import {
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -20,6 +21,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { Button } from "../ui/button"
+import SignOutButton from "./SignOutButton"
 
 // This is sample data.
 const data = {
@@ -164,6 +167,7 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -206,7 +210,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </Collapsible>
         ))}
       </SidebarContent>
-      <SidebarRail />
+      <SidebarFooter>
+        <SignOutButton />
+      </SidebarFooter>
     </Sidebar>
   )
 }
