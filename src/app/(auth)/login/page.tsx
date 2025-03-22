@@ -1,4 +1,4 @@
-import { login, signup } from '@/app/(auth)/login/actions'
+import { login } from '@/app/(auth)/actions'
 
 export default function Login() {
     return (
@@ -9,7 +9,7 @@ export default function Login() {
                 <label htmlFor="password">Password:</label>
                 <input id="password" name="password" type="password" required className='bg-amber-300' />
                 <button formAction={login}>Log in</button>
-                <button formAction={signup}>Sign up</button>
+
             </div>
         </form>
     )

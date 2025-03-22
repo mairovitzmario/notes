@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus, Pencil, Trash2, FolderOpen, FileText } from "lucide-react";
 
-import { FeatureItem } from "@/app/(notes)/components/FeatureItem";
-import NoteIcon from "@/app/(notes)/components/NoteIcon";
-import AddNoteButton from "@/app/(notes)/components/AddNoteButton";
+import { FeatureItem } from "@/app/(notes)/components/feature-item";
+import NoteIcon from "@/app/(notes)/components/note-icon";
+import AddNoteButton from "@/app/(notes)/components/add-note-button";
 
 export default function Home() {
 
