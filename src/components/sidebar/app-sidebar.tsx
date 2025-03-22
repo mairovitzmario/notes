@@ -134,6 +134,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
           </Collapsible>
         ))}
       </SidebarContent>
+      <SidebarRail />
       <SidebarFooter>
         <SignOutButton />
       </SidebarFooter>

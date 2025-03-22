@@ -1,5 +1,16 @@
 import { Pencil } from "lucide-react"
 
+
+interface NoteLineProps {
+    width: string; // "3/4", "full", "5/6", etc.
+    className?: string;
+}
+
+function NoteLine({ width, className = "" }: NoteLineProps) {
+    return <div className={`w-${width} h-3 bg-primary opacity-10 rounded ${className}`}></div>;
+}
+
+
 export default function NoteIcon() {
     return (
         <div className="relative w-48 h-64 md:w-56 md:h-72 animate-wiggle group">
@@ -9,19 +20,19 @@ export default function NoteIcon() {
                 <div className="absolute inset-0 bg-background border border-border rounded-lg shadow-md flex flex-col p-4">
 
                     <div className="space-y-2">
-                        <div className="w-3/4 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded"></div>
-                        <div className="w-5/6 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded"></div>
-                        <div className="w-4/5 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-5/6 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded"></div>
-                        <div className="w-4/5 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-5/6 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded"></div>
-                        <div className="w-4/5 h-3 bg-muted/70 rounded"></div>
-                        <div className="w-full h-3 bg-muted/70 rounded hidden md:block"></div>
-                        <div className="w-5/6 h-3 bg-muted/70 rounded hidden md:block"></div>
+                        <NoteLine width="3/4" />
+                        <NoteLine width="full" />
+                        <NoteLine width="5/6" />
+                        <NoteLine width="full" />
+                        <NoteLine width="4/5" />
+                        <NoteLine width="5/6" />
+                        <NoteLine width="full" />
+                        <NoteLine width="4/5" />
+                        <NoteLine width="5/6" />
+                        <NoteLine width="full" />
+                        <NoteLine width="4/5" />
+                        <NoteLine width="full" className="hidden md:block" />
+                        <NoteLine width="5/6" className="hidden md:block" />
                     </div>
                 </div>
             </div>

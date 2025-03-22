@@ -1,18 +1,24 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { FileText } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Plus } from "lucide-react";
 
 export default function AddNoteButton() {
-    function addNote() {
+    const isMobile = useIsMobile();
 
+    if (isMobile) {
+        return (
+            <Button size={'icon'} variant={'ghost'}>
+                <Plus className="scale-125" />
+            </Button >
+        )
     }
 
     return (
-        <Button size="lg" className="gap-2" onClick={addNote}>
-            <FileText className="w-4 h-4" />
-            Create Your First Note
+        <Button size="lg" className="gap-2" variant={'ghost'}>
+            <Plus />
+            Add Note
         </Button>
-    )
+    );
 }

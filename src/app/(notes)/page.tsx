@@ -3,7 +3,7 @@ import { Plus, Pencil, Trash2, FolderOpen, FileText } from "lucide-react";
 
 import { FeatureItem } from "@/app/(notes)/components/feature-item";
 import NoteIcon from "@/app/(notes)/components/note-icon";
-import AddNoteButton from "@/app/(notes)/components/add-note-button";
+import AddNoteButton from "@/app/(notes)/components/add-first-note-button";
 
 export default function Home() {
 
