@@ -2,12 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
+import { addNote } from "../actions";
 
 export default function AddFirstNoteButton() {
-    function addNote() {
 
-    }
 
 
     return (

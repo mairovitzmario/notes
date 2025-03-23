@@ -19,27 +19,19 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
 
 import SignOutButton from "@/components/sidebar/sign-out-button"
+import SidebarItem from "./sidebar-item"
+import { Tables } from "@/utils/supabase/supabase-types"
+import getUserId from "@/utils/supabase/helpers/get-user-id"
 
-
-export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+async function getSections() {
   const supabase = await createClient()
 
   // Get the current user using the correct destructuring pattern
-  const { data: { user } } = await supabase.auth.getUser()
-
-  // Redirect to login if no active session
-  if (!user) {
-    redirect('/login')
-  }
-
-  // Get user ID from the user object
-  const userId = user.id
+  const userId = await getUserId();
 
   // Query only notes belonging to the logged-in user
   const { data, error } = await supabase
@@ -47,47 +39,53 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
     .select('*')
     .eq('user_id', userId)
 
+  console.log('data', data)
+
   if (error) {
     console.log('error', error)
     redirect('/error')
 
   }
 
-  // Use section type with integrated icons
+  // Filter notes based on the their category (PINNED, NOTES, RECYCLED)
+  const mapNotes = (predicate: (note: Tables<'notes'>) => boolean): SectionItem[] =>
+    (data?.filter(predicate) ?? []).map((note): SectionItem => ({
+      id: note.id,
+      title: note.title || 'Untitled Note',
+      url: `/note/${note.id}`
+    }));
+
   const sections: Sections = {
     navMain: [
       {
         title: 'Pinned',
         url: "#",
         icon: <Pin className="w-4 h-4 mr-2" />,
-        items: data?.filter(note => note.pinned === true)
-          .map((note): SectionItem => ({
-            title: note.title || 'Untitled Note',
-            url: `/notes/${note.id}`
-          })) || []
+        items: mapNotes(note => note.pinned === true)
       },
       {
         title: 'Notes',
         url: "#",
         icon: <FileText className="w-4 h-4 mr-2" />,
-        items: data?.filter(note => note.pinned !== true && note.scheduled_deletion === null)
-          .map((note): SectionItem => ({
-            title: note.title || 'Untitled Note',
-            url: `/notes/${note.id}`
-          })) || []
+        items: mapNotes(note => note.pinned !== true && note.scheduled_deletion === null)
       },
       {
         title: 'Recycled',
         url: "#",
         icon: <Trash className="w-4 h-4 mr-2" />,
-        items: data?.filter(note => note.scheduled_deletion !== null)
-          .map((note): SectionItem => ({
-            title: note.title || 'Untitled Note',
-            url: `/notes/${note.id}`
-          })) || []
+        items: mapNotes(note => note.scheduled_deletion !== null)
       }
     ]
   };
+
+
+  return sections;
+}
+
+
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const sections = await getSections();
+  console.log('sections', sections);
 
   return (
     <Sidebar {...props}>
@@ -121,11 +119,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 <SidebarGroupContent>
                   <SidebarMenu>
                     {section.items?.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild isActive={false}>
-                          <a href={item.url}>{item.title}</a>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      <SidebarItem item={item} key={item.id} />
                     ))}
                   </SidebarMenu>
                 </SidebarGroupContent>

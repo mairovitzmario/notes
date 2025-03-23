@@ -1,3 +1,5 @@
+// TODO: Check if the route (/api/auth/confirm) is working as expected
+
 import { type EmailOtpType } from '@supabase/supabase-js'
 import { type NextRequest } from 'next/server'
 

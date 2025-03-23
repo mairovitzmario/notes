@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus, Pencil, Trash2, FolderOpen, FileText } from "lucide-react";
+import { Plus, Pencil, Trash2, FolderOpen, } from "lucide-react";
 
 import { FeatureItem } from "@/app/(notes)/components/feature-item";
 import NoteIcon from "@/app/(notes)/components/note-icon";
