@@ -23,13 +23,9 @@ async function getNote(id: string) {
     return data;
 }
 
-type Props = {
-    params: { id: string }
-    searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export default async function NotePage({ params }: Props) {
-    const note = await getNote(params.id);
+export default async function NotePage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const note = await getNote(id);
     console.log(note)
 
     return (
