@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google';
+
 
 
 export default function Title({ text, className }: { text: string, className?: string }) {

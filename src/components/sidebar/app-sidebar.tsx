@@ -28,6 +28,7 @@ import { Tables } from "@/utils/supabase/supabase-types"
 import getUserId from "@/utils/supabase/helpers/get-user-id"
 
 async function getSections() {
+  console.log('sidebar created')
   const supabase = await createClient()
 
   // Get the current user using the correct destructuring pattern
