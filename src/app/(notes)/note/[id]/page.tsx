@@ -23,14 +23,12 @@ async function getNote(id: string) {
     return data;
 }
 
-interface NotePageProps {
-    params: {
-        id: string;
-    };
-    searchParams: { [key: string]: string | string[] | undefined };
+type Props = {
+    params: { id: string }
+    searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function NotePage({ params }: NotePageProps) {
+export default async function NotePage({ params }: Props) {
     const note = await getNote(params.id);
     console.log(note)
 
