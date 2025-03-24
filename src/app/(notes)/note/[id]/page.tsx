@@ -23,7 +23,14 @@ async function getNote(id: string) {
     return data;
 }
 
-export default async function NotePage({ params }: { params: { id: string } }) {
+interface NotePageProps {
+    params: {
+        id: string;
+    };
+    searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function NotePage({ params }: NotePageProps) {
     const note = await getNote(params.id);
     console.log(note)
 
