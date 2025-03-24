@@ -25,6 +25,7 @@ async function getNote(id: string) {
 
 export default async function NotePage({ params }: { params: { id: string } }) {
     const note = await getNote(params.id);
+    console.log(note)
 
     return (
         <div>
