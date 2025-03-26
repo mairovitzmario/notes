@@ -98,37 +98,3 @@ This note-taking application allows users to create, read, update, and delete pe
    
    Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Development
-
-- `pages/` - Application routes
-- `components/` - Reusable UI components
-- `utils/` - Helper functions and utilities
-- `utils/supabase/` - Supabase client configuration
-
-## Deployment
-
-This project can be easily deployed on [Vercel](https://vercel.com) or any other Next.js-compatible hosting:
-
-```bash
-npm run build
-npm run start
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License.
-
-## Contact
-
-Mario Mairovitz - [@mairovitzmario](https://github.com/mairovitzmario)
-
-Project Link: [https://github.com/mairovitzmario/notes](https://github.com/mairovitzmario/notes)
-
