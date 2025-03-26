@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Notes Project
+
+A modern note-taking application built with Next.js and Supabase.
+
+![Next.js](https://img.shields.io/badge/Next.js-13-black)
+![Supabase](https://img.shields.io/badge/Supabase-Database-green)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
+## Overview
+
+This note-taking application allows users to create, read, update, and delete personal notes with authentication and real-time database functionality powered by Supabase.
+
+## Features
+
+- 📝 Create, read, update, and delete notes
+- 🔒 User authentication via Supabase
+- 🚀 Server-side rendering for optimal performance
+- 📱 Responsive design for all devices
+- ⚡ Real-time database updates
+- 🔄 Automatic timestamp updating
+
+## Technology Stack
+
+- [Next.js](https://nextjs.org/) - React framework for production
+- [Supabase](https://supabase.io/) - Open source Firebase alternative
+- React - UI library
+- TypeScript - Type safety
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 14.6.0 or newer
+- Git
+- Supabase account
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:mairovitzmario/notes.git
+   cd notes
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Supabase**
+   
+   a. Create a new Supabase project at [supabase.com](https://supabase.com)
+   
+   b. Create `.env.local` file in the project root with:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Set up database schema**
+
+   a. Create notes table with the schema defined in `src/utils/supabase/supabase-types.ts`
+   
+   b. Add the following Row Level Security policy to allow users to manage their notes:
+   
+   ```sql
+   CREATE POLICY "Allow CRUD for user's own notes" 
+   ON "public"."notes"
+   TO public
+   USING (user_id = auth.uid())
+   WITH CHECK (user_id = auth.uid());
+   ```
+
+5. **Create update timestamp trigger**
+
+   ```sql
+   CREATE OR REPLACE FUNCTION update_timestamp()
+   RETURNS TRIGGER AS $$
+   BEGIN
+     NEW.updated_at = NOW();
+     RETURN NEW;
+   END;
+   $$ LANGUAGE plpgsql;
+
+   CREATE TRIGGER set_timestamp
+   BEFORE UPDATE ON notes
+   FOR EACH ROW
+   WHEN (OLD IS DISTINCT FROM NEW)
+   EXECUTE FUNCTION update_timestamp();
+   ```
+
+6. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+7. **View the application**
+   
+   Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Development
+
+- `pages/` - Application routes
+- `components/` - Reusable UI components
+- `utils/` - Helper functions and utilities
+- `utils/supabase/` - Supabase client configuration
+
+## Deployment
+
+This project can be easily deployed on [Vercel](https://vercel.com) or any other Next.js-compatible hosting:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
+This project is licensed under the MIT License.
 
-To learn more about Next.js, take a look at the following resources:
+## Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Mario Mairovitz - [@mairovitzmario](https://github.com/mairovitzmario)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Project Link: [https://github.com/mairovitzmario/notes](https://github.com/mairovitzmario/notes)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

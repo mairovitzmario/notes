@@ -39,6 +39,7 @@ async function getSections() {
     .from('notes')
     .select('*')
     .eq('user_id', userId)
+    .order('updated_at', { ascending: false })  // Sort by updated_at in descending order
 
   console.log('data', data)
 
